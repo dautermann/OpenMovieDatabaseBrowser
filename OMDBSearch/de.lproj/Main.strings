@@ -1,0 +1,30 @@
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "B5i-7f-JLq"; */
+"B5i-7f-JLq.text" = "Ich weiß nicht";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "GT8-mG-yZr"; */
+"GT8-mG-yZr.text" = "Ich weiß nicht";
+
+/* Class = "UITabBarItem"; title = "Favorites"; ObjectID = "MyL-yV-ndA"; */
+"MyL-yV-ndA.title" = "Favoriten";
+
+/* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "Rh4-j5-tmc"; */
+"Rh4-j5-tmc.title" = "Zurück";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "V1C-41-OjS"; */
+"V1C-41-OjS.text" = "Ich weiß nicht";
+
+/* Class = "UITabBarItem"; title = "Search"; ObjectID = "Vix-H5-h60"; */
+"Vix-H5-h60.title" = "Suche";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "ZD0-PZ-OR7"; */
+"ZD0-PZ-OR7.text" = "Ich weiß nicht";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "biH-9V-RwC"; */
+"biH-9V-RwC.text" = "Insert Latin Text here";
+
+/* Class = "UILabel"; text = "type a movie into the search bar above"; ObjectID = "lDp-ok-d6F"; */
+"lDp-ok-d6F.text" = "Geben Sie einen Film in die Suchleiste oben";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "x4x-eh-cL6"; */
+"x4x-eh-cL6.text" = "Ich weiß nicht";
