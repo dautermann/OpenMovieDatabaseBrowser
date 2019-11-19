@@ -63,22 +63,36 @@
     }
     _movieIDString = movieDictionary[@"imdbID"];
 //    _director = movieDictionary[@"artistName"];
-    _releaseDate = [NSDate dateWithString:movieDictionary[@"Year"]];
-    _posterSmallURL = [NSURL URLWithString:movieDictionary[@"Poster"]];
-//    _longDescription = movieDictionary[@"longDescription"];
-//    _shortDescription = movieDictionary[@"shortDescription"]; // only for certain movies
+    _releaseYear = movieDictionary[@"Year"];
+    NSString *potentialURL = movieDictionary[@"Poster"];
+    // some movies come back with "N/A" in the poster... 7 here is the minimum length for a HTTP:// prefix
+    if([potentialURL length] > 7)
+    {
+        _posterSmallURL = [NSURL URLWithString:potentialURL];
+    }
+    NSLog(@"movie name is %@ and poster URL is %@", _name, _posterSmallURL);
+    NSString *plot = movieDictionary[@"Plot"];
+    if([plot length] > 0)
+    {
+        _longDescription = plot;
+    }
+    NSString *rated = movieDictionary[@"Rated"];
+    if([rated length] > 0)
+    {
+        _rating = rated;
+    }
     _isFavorite = [[MovieFavoritesManager sharedInstance] isThisMovieAFavorite:self.movieIDString];
 
     // I want a big poster
     //
     // http://stackoverflow.com/questions/8781725/larger-itunes-search-api-images
-    NSMutableString *posterString = [[NSMutableString alloc] initWithString:movieDictionary[@"Poster"] ? movieDictionary[@"Poster"]:@""];
-    if ([posterString length] > 0)
-    {
-        [posterString replaceOccurrencesOfString:@"100x100" withString:@"600x600" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [posterString length])];
+//    NSMutableString *posterString = [[NSMutableString alloc] initWithString:movieDictionary[@"Poster"] ? movieDictionary[@"Poster"]:@""];
+//    if ([posterString length] > 0)
+//    {
+//        [posterString replaceOccurrencesOfString:@"100x100" withString:@"600x600" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [posterString length])];
 
-        _posterBigURL = [NSURL URLWithString:posterString];
-    }
+//        _posterBigURL = [NSURL URLWithString:posterString];
+//    }
     return TRUE;
 }
 
@@ -86,7 +100,7 @@
 // probably a super duper place to use a single function with a block for the completion
 - (void)fetchInformationAboutMovie
 {
-    NSURL *urlToSearch = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/lookup?id=%@", self.movieIDString]];
+    NSURL *urlToSearch = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.omdbapi.com/?i=%@&apikey=64760d94", self.movieIDString]];
     self.fetchTask = [[NSURLSession sharedSession] dataTaskWithURL:urlToSearch completionHandler: ^(NSData *data, NSURLResponse *response, NSError *error) {
         if (error != nil)
         {
@@ -104,19 +118,11 @@
             }
             else
             {
-                NSArray *rawMovieArray = omdbResultDict[@"results"];
+                [self populateMovieFieldsWith:omdbResultDict];
 
-                // should only be one entry since we're looking up via ID
-                if ([rawMovieArray count] > 0)
+                if (self.collectionCell != nil)
                 {
-                    NSDictionary *movieDictionary = rawMovieArray[0];
-                    // NSLog(@"movie dict is %@", movieDictionary);
-                    [self populateMovieFieldsWith:movieDictionary];
-
-                    if (self.collectionCell != nil)
-                    {
-                        [self.collectionCell configureCell];
-                    }
+                    [self.collectionCell configureCell];
                 }
             }
         }

@@ -16,7 +16,7 @@
 
 @property (weak) IBOutlet SFDimImageView *posterImageView;
 @property (weak) IBOutlet UILabel *nameLabel;
-@property (weak) IBOutlet UILabel *yearAndDirectorLabel;
+@property (weak) IBOutlet UILabel *yearLabel;
 @property (weak) IBOutlet UILabel *shortDescriptionLabel;
 
 @property (strong) MovieObject *movieObject; // what we're currently rendering
@@ -69,7 +69,7 @@
         self.movieObject = nil;
     }
     self.nameLabel.text = @"";
-    self.yearAndDirectorLabel.text = @"";
+    self.yearLabel.text = @"";
     self.shortDescriptionLabel.text = @"";
 
     self.favoriteButton.selected = NO;
@@ -80,9 +80,12 @@
 
 - (void)setPosterImageToURL:(NSURL *)imageURL
 {
-    self.posterImageView.imageURL = imageURL;
+    if (imageURL != nil)
+    {
+        self.posterImageView.imageURL = imageURL;
 
-    [[PhotoBrowserCache sharedInstance] performGetPhoto:imageURL intoImageView:self.posterImageView];
+        [[PhotoBrowserCache sharedInstance] performGetPhoto:imageURL intoImageView:self.posterImageView];
+    }
 }
 
 - (void)configureCell
@@ -92,7 +95,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             self.nameLabel.text = self.movieObject.name;
 
-            self.yearAndDirectorLabel.text = [NSString stringWithFormat:@"%@ %@", [self.movieObject.releaseDate yearAsString], self.movieObject.director];
+            self.yearLabel.text = self.movieObject.releaseYear;
 
             NSString *description = self.movieObject.shortDescription;
             if(description == NULL)
@@ -109,7 +112,7 @@
             //
             // if I see any memory warnings during extensive testing, I'd probably want to
             // write a UIImage category to generate thumbnails directly from this big UIImage object
-            [self setPosterImageToURL:self.movieObject.posterBigURL];
+            [self setPosterImageToURL:self.movieObject.posterSmallURL];
         });
     }
 }
@@ -171,7 +174,7 @@
     UIColor *textColor = [averageColor blackOrWhiteContrastingColor];
 
     self.nameLabel.textColor = textColor;
-    self.yearAndDirectorLabel.textColor = textColor;
+    self.yearLabel.textColor = textColor;
     self.shortDescriptionLabel.textColor = textColor;
 }
 

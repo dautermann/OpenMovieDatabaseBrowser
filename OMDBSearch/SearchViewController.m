@@ -30,14 +30,14 @@
 
 @end
 
-ProcessingCallback processingCallback = ^(SearchViewController *searchViewController, NSString *searchTerm, NSArray *movieObjectsToAdd, NSError *error) {
+ProcessingCallback processingCallback = ^(SearchViewController *searchViewController, NSString *searchTerm, NSInteger totalRecordsToAdd, NSArray *movieObjectsToAdd, NSError *error) {
     if (movieObjectsToAdd != nil) {
-        searchViewController.movieArray = [searchViewController.movieArray arrayByAddingObjectsFromArray:movieObjectsToAdd]; //movieObjectMutableArray;f
-
+        searchViewController.movieArray = [searchViewController.movieArray arrayByAddingObjectsFromArray:movieObjectsToAdd];
+        
         [searchViewController updateCollection];
 
-        if ([searchViewController.movieArray count] < totalCount) {
-            [SearchViewController resultsForSearchTerm:encodedSearchTerm withCallback: processingCallback];
+        if ([searchViewController.movieArray count] < totalRecordsToAdd) {
+            [searchViewController resultsForSearchTerm:searchTerm onPage:([searchViewController.movieArray count] / 10) withCallback:processingCallback];
         }
     }
 };
@@ -88,7 +88,6 @@ ProcessingCallback processingCallback = ^(SearchViewController *searchViewContro
 
 #pragma mark search bar delegate methods
 
-
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
     if (self.tapOutsideSearchBarRecognizer == nil)
@@ -124,10 +123,11 @@ ProcessingCallback processingCallback = ^(SearchViewController *searchViewContro
     });
 }
 
-- (void) resultsForSearchTerm: (NSString *) searchString onPage:(NSInteger) currentPage withCallback:(void (^)(NSArray *movieObjectsToAdd, NSError *error)) callback {
-    NSURL *urlToSearch = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.omdbapi.com/?s=%@&apikey=64760d94&page=%ld", searchString, currentPage]];
+- (void) resultsForSearchTerm: (NSString *) searchString onPage:(NSInteger) currentPage withCallback:(ProcessingCallback) callback {
+    NSURL *urlToSearch = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.omdbapi.com/?s=%@&type=movie&apikey=64760d94&page=%ld", searchString, currentPage]];
     NSURLSessionDataTask *newTask;
 
+#warning GET RID OF THIS
     if (currentPage > 3)
         return;
 
@@ -137,7 +137,7 @@ ProcessingCallback processingCallback = ^(SearchViewController *searchViewContro
             NSLog(@"error when trying to connect to %@ - %@", urlToSearch.absoluteString, error.localizedDescription);
 
             [[SFAlertManager sharedInstance] displayAlertIfPossible:[NSString stringWithFormat:@"error when trying to connect to server - %@", error.localizedDescription]];
-            callback(nil, error);
+            callback(self, searchString, 0, nil, error);
         }
         else
         {
@@ -146,11 +146,12 @@ ProcessingCallback processingCallback = ^(SearchViewController *searchViewContro
             {
                 NSLog(@"error when trying to deserialize data from %@ - %@", urlToSearch.absoluteString, error.localizedDescription);
                 [[SFAlertManager sharedInstance] displayAlertIfPossible:[NSString stringWithFormat:@"can't decode response from server - %@", error.localizedDescription]];
-                callback(nil, error);
+                callback(self, searchString, 0, nil, error);
             }
             else
             {
                 NSArray *rawMovieArray = omdbResultDict[@"Search"];
+                NSInteger totalCount = [omdbResultDict[@"totalResults"] integerValue];
                 NSMutableArray *movieObjectArray = [[NSMutableArray alloc] initWithCapacity: 10];
                 for (NSDictionary *movieDictionary in rawMovieArray)
                 {
@@ -163,7 +164,7 @@ ProcessingCallback processingCallback = ^(SearchViewController *searchViewContro
                         }
                     }
                 }
-                callback(movieObjectArray, nil);
+                callback(self, searchString, totalCount, movieObjectArray, nil);
             }
         }
     }];
@@ -174,7 +175,7 @@ ProcessingCallback processingCallback = ^(SearchViewController *searchViewContro
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     NSString *encodedSearchTerm = [searchBar.text stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    NSURL *urlToSearch = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.omdbapi.com/?s=%@&apikey=64760d94", encodedSearchTerm]];
+    NSURL *urlToSearch = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.omdbapi.com/?s=%@&type=movie&apikey=64760d94", encodedSearchTerm]];
 
     if (self.searchTask != nil)
     {
@@ -213,11 +214,11 @@ ProcessingCallback processingCallback = ^(SearchViewController *searchViewContro
                     }
                 }
 
+                self.movieArray = movieObjectMutableArray;
                 NSInteger totalCount = [omdbResultDict[@"totalResults"] integerValue];
                 if(totalCount > 10)
                 {
-                    if (totalCount > 30)
-                        totalCount = 30;
+                    [self resultsForSearchTerm:encodedSearchTerm onPage:2 withCallback:processingCallback];
 
                 } else {
                     [self updateCollection];

@@ -22,6 +22,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // maybe do this asynchronously
+    [self.movieObjectToDisplay fetchInformationAboutMovie];
 
     self.bigPosterImageView.userInteractionEnabled = YES;
 }
@@ -32,10 +35,10 @@
     [super viewWillAppear:animated];
 
     self.navigationItem.title = self.movieObjectToDisplay.name;
-    self.bigPosterImageView.imageURL = self.movieObjectToDisplay.posterBigURL;
+    self.bigPosterImageView.imageURL = self.movieObjectToDisplay.posterSmallURL;
     self.movieDescriptionView.text = self.movieObjectToDisplay.longDescription;
     
-    [[PhotoBrowserCache sharedInstance] performGetPhoto:self.movieObjectToDisplay.posterBigURL intoImageView:self.bigPosterImageView];
+    [[PhotoBrowserCache sharedInstance] performGetPhoto:self.movieObjectToDisplay.posterSmallURL intoImageView:self.bigPosterImageView];
 }
 
 - (void)viewDidLayoutSubviews

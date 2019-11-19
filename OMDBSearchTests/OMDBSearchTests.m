@@ -27,7 +27,7 @@
 }
 
 - (void)testCreateMovieObject {
-    NSDictionary *testMovieDictionary = @{ @"trackId" : @978943481, @"trackName" : @"Hardware Wars", @"releaseDate" : @"1977-05-25T07:00:00Z"};
+    NSDictionary *testMovieDictionary = @{ @"trackId" : @978943481, @"trackName" : @"Hardware Wars", @"releaseYear" : @"1977-05-25T07:00:00Z"};
     MovieObject *movieObject = [[MovieObject alloc] init];
     if (movieObject) {
         [movieObject populateMovieFieldsWith:testMovieDictionary];
@@ -35,12 +35,12 @@
     
     XCTAssert([movieObject.name isEqualToString:testMovieDictionary[@"trackName"]], "movieName isn't what we expected");
     
-    NSDate *releaseDate = [NSDate dateWithString:testMovieDictionary[@"releaseDate"]];
-    XCTAssertEqual([movieObject.releaseDate timeIntervalSinceReferenceDate], [releaseDate timeIntervalSinceReferenceDate], "release date should be equal");
+    NSDate *releaseYear = [NSDate dateWithString:testMovieDictionary[@"releaseYear"]];
+    XCTAssertEqual([movieObject.releaseYear timeIntervalSinceReferenceDate], [releaseYear timeIntervalSinceReferenceDate], "release date should be equal");
 }
 
 - (void)testInvalidMovieObject {
-    NSDictionary *testMovieDictionary = @{ @"trackId" : @978943481, @"collectionName" : @"Star Wars: Six Movie Collection", @"releaseDate" : @"2015-04-10T07:00:00Z"};
+    NSDictionary *testMovieDictionary = @{ @"trackId" : @978943481, @"collectionName" : @"Star Wars: Six Movie Collection", @"releaseYear" : @"2015-04-10T07:00:00Z"};
     MovieObject *movieObject = [[MovieObject alloc] init];
     if (movieObject) {
         [movieObject populateMovieFieldsWith:testMovieDictionary];
@@ -50,17 +50,17 @@
 }
 
 - (void)testDatesInMovieObject {
-    NSDictionary *testMovieDictionary = @{ @"trackId" : @978943481, @"trackName" : @"Hardware Wars", @"releaseDate" : @"I am up to no good T07:00:00Z"};
+    NSDictionary *testMovieDictionary = @{ @"trackId" : @978943481, @"trackName" : @"Hardware Wars", @"releaseYear" : @"I am up to no good T07:00:00Z"};
     MovieObject *movieObject = [[MovieObject alloc] init];
     if (movieObject) {
         [movieObject populateMovieFieldsWith:testMovieDictionary];
     }
     
-    XCTAssertNil(movieObject.releaseDate, "release date should be nil");
+    XCTAssertNil(movieObject.releaseYear, "release date should be nil");
     
     testMovieDictionary = @{ @"trackId" : @978945481, @"trackName" : @"Some Other Movie"};
     
-    XCTAssertNil(movieObject.releaseDate, "release date should be nil");
+    XCTAssertNil(movieObject.releaseYear, "release date should be nil");
 }
 
 @end

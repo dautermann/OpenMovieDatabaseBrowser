@@ -17,8 +17,9 @@
 @property (strong, readonly) NSString *name;
 @property (strong, readonly) NSString *director;
 @property (strong, readonly) NSString *movieIDString; // it's imported and converted from a NSNumber
-@property (strong, readonly) NSDate *releaseDate;
+@property (strong, readonly) NSString *releaseYear;
 @property (strong, readonly) NSURL *posterSmallURL;
+@property (strong, readonly) NSString *rating;
 @property (strong, readonly) NSURL *posterBigURL;
 @property (strong, readonly) NSString *longDescription;
 @property (strong, readonly) NSString *shortDescription; // only returned for some movies

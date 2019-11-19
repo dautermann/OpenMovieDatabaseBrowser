@@ -10,7 +10,7 @@
 
 @class SearchViewController; // gah ugh so sloppy ....
 
-typedef void (^ProcessingCallback)(SearchViewController *, NSString *, NSArray *, NSError *);
+typedef void (^ProcessingCallback)(SearchViewController *, NSString *, NSInteger, NSArray *, NSError *);
 
 @interface SearchViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate>
 
