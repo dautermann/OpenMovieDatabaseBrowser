@@ -69,7 +69,6 @@
     {
         _posterSmallURL = [NSURL URLWithString:potentialURL];
     }
-    NSLog(@"movie name is %@ and poster URL is %@", _name, _posterSmallURL);
     NSString *plot = movieDictionary[@"Plot"];
     if([plot length] > 0)
     {
