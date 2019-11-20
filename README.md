@@ -23,7 +23,7 @@ Open Movie Database Browser sample app for SalesForce
 
 10. The simple caching scheme I did for images (in Swift) originally came from my 500pxDemoBrowser repo found at [https://github.com/dautermann/500pxDemoBrowser](https://github.com/dautermann/500pxDemoBrowser).
 
-#Current known issues:
+# Current known issues:
 
 1. The poster images from Amazon are all one resolution, which might mean memory issues if too many images are being displayed (and kept in memory) for a large search result.  Would be nice to know if I can adjust the sizes via some Amazon API.
 
