@@ -216,12 +216,11 @@ ProcessingCallback processingCallback = ^(SearchViewController *searchViewContro
 
                 self.movieArray = movieObjectMutableArray;
                 NSInteger totalCount = [omdbResultDict[@"totalResults"] integerValue];
+                [self updateCollection];
+
                 if(totalCount > 10)
                 {
                     [self resultsForSearchTerm:encodedSearchTerm onPage:2 withCallback:processingCallback];
-
-                } else {
-                    [self updateCollection];
                 }
             }
         }
@@ -250,7 +249,7 @@ ProcessingCallback processingCallback = ^(SearchViewController *searchViewContro
     [cell setCellToMovieObject:movieObject];
 
     // and we do this in case the cell needs to get updated information from the movie object
-    movieObject.collectionCell = cell;
+    movieObject.delegate = cell;
     
     return cell;
 }

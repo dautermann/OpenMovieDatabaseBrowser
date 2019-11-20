@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class SFSearchResultCell;
+@protocol MovieObjectProtocol
+
+- (void) movieObjectUpdated;
+
+@end
 
 @interface MovieObject : NSObject
 
@@ -16,15 +20,15 @@
 // the init method does all the setting
 @property (strong, readonly) NSString *name;
 @property (strong, readonly) NSString *director;
-@property (strong, readonly) NSString *movieIDString; // it's imported and converted from a NSNumber
+@property (strong, readonly) NSString *movieIDString;
 @property (strong, readonly) NSString *releaseYear;
 @property (strong, readonly) NSURL *posterSmallURL;
 @property (strong, readonly) NSString *rating;
 @property (strong, readonly) NSURL *posterBigURL;
-@property (strong, readonly) NSString *longDescription;
-@property (strong, readonly) NSString *shortDescription; // only returned for some movies
+@property (strong, readonly) NSString *plot;
 @property (readwrite) BOOL isFavorite;
-@property (weak) SFSearchResultCell *collectionCell;
+// @property (weak) SFSearchResultCell *collectionCell;
+@property (weak) NSObject<MovieObjectProtocol>* delegate;
 
 - (void)fetchInformationAboutMovie;
 

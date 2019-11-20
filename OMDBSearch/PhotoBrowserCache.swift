@@ -37,10 +37,12 @@ class PhotoBrowserCache: NSObject, URLSessionDelegate, URLSessionTaskDelegate {
         urlSession = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: OperationQueue.main)
     }
     
-    // if I have any time, I would write a hash function
-    // to match the behavior that a URL shortner might be using
+    // the best solution (and/or for production level code) would be to incorporate a hash function
+    // to match the behavior that a URL shortner might be using, but
+    // doing things this way allows one to look at the filename and know
+    // roughly what the image is or where it came from
     func getFilenameFromURL(_ urlToFetch: URL) -> String {
-        let originalURLString = "\(urlToFetch.path)\(urlToFetch.path)"
+        let originalURLString = "\(urlToFetch.path.dropFirst(1))" // dropFirst gets rid of the leading slash
         return originalURLString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
     }
     

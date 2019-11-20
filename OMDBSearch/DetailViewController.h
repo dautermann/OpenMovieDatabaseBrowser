@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MovieObject.h"
 
-@interface DetailViewController : UIViewController
+@interface DetailViewController : UIViewController <MovieObjectProtocol>
 
 @property (strong) MovieObject *movieObjectToDisplay;
 

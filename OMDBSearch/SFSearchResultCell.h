@@ -17,7 +17,7 @@
 
 @end
 
-@interface SFSearchResultCell : UICollectionViewCell
+@interface SFSearchResultCell : UICollectionViewCell <MovieObjectProtocol>
 
 @property (weak) IBOutlet UIButton *favoriteButton;
 

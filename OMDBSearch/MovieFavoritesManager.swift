@@ -47,7 +47,7 @@ class MovieFavoritesManager: NSObject {
     
     @objc func isThisMovieAFavorite(_ movieID : String) -> Bool
     {
-        if let _ = favoriteSet?.index(of: movieID)
+        if let _ = favoriteSet?.firstIndex(of: movieID)
         {
             return true
         } else {

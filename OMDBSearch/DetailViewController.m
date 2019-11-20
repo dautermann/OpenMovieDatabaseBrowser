@@ -12,8 +12,8 @@
 
 @interface DetailViewController ()
 
-@property (weak) IBOutlet SFImageView *bigPosterImageView;
-@property (weak) IBOutlet UITextView *movieDescriptionView;
+@property (weak) IBOutlet SFImageView *posterImageView;
+@property (weak) IBOutlet UITextView *movieDetailsTextView;
 
 @end
 
@@ -24,9 +24,10 @@
     [super viewDidLoad];
     
     // maybe do this asynchronously
+    self.movieObjectToDisplay.delegate = self;
     [self.movieObjectToDisplay fetchInformationAboutMovie];
 
-    self.bigPosterImageView.userInteractionEnabled = YES;
+    self.posterImageView.userInteractionEnabled = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -34,17 +35,23 @@
     [self.navigationController setNavigationBarHidden:NO];
     [super viewWillAppear:animated];
 
-    self.navigationItem.title = self.movieObjectToDisplay.name;
-    self.bigPosterImageView.imageURL = self.movieObjectToDisplay.posterSmallURL;
-    self.movieDescriptionView.text = self.movieObjectToDisplay.longDescription;
-    
-    [[PhotoBrowserCache sharedInstance] performGetPhoto:self.movieObjectToDisplay.posterSmallURL intoImageView:self.bigPosterImageView];
+    // show what MovieObject knows about itself so far; fetchInformationAboutMovie will update in a few microseconds
+    [self movieObjectUpdated];
 }
 
 - (void)viewDidLayoutSubviews
 {
     // if text is scrollable, start the text at the top
-    [self.movieDescriptionView setContentOffset:CGPointZero animated:NO];
+    [self.movieDetailsTextView setContentOffset:CGPointZero animated:NO];
+}
+
+- (void)movieObjectUpdated
+{
+    self.navigationItem.title = self.movieObjectToDisplay.name;
+    self.posterImageView.imageURL = self.movieObjectToDisplay.posterSmallURL;
+    self.movieDetailsTextView.text = [NSString stringWithFormat: @"%@\n%@\nMPAA Rating:%@\n\n%@", self.movieObjectToDisplay.name, self.movieObjectToDisplay.releaseYear, self.movieObjectToDisplay.rating, self.movieObjectToDisplay.plot];
+
+    [[PhotoBrowserCache sharedInstance] performGetPhoto:self.movieObjectToDisplay.posterSmallURL intoImageView:self.posterImageView];
 }
 
 @end

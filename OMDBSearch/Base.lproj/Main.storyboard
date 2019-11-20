@@ -39,7 +39,7 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GL0-vF-WN2" customClass="SFDimImageView">
                                                     <rect key="frame" x="8" y="8" width="164" height="184"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GT8-mG-yZr">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GT8-mG-yZr">
                                                     <rect key="frame" x="8" y="15" width="164" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -49,12 +49,6 @@
                                                     <rect key="frame" x="8" y="18" width="164" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mog-vG-QvB">
-                                                    <rect key="frame" x="11" y="21" width="158" height="168"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gLD-kf-zX3">
@@ -72,31 +66,26 @@
                                                 </button>
                                             </subviews>
                                         </view>
-                                        <color key="backgroundColor" red="1" green="0.96158241394081956" blue="0.98925761315012639" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="GL0-vF-WN2" firstAttribute="leading" secondItem="wLs-rV-o7g" secondAttribute="leadingMargin" id="0g2-Y2-iCS"/>
                                             <constraint firstItem="ZD0-PZ-OR7" firstAttribute="top" secondItem="GT8-mG-yZr" secondAttribute="bottom" constant="3" id="3EV-YG-kno"/>
                                             <constraint firstItem="GT8-mG-yZr" firstAttribute="leading" secondItem="wLs-rV-o7g" secondAttribute="leadingMargin" id="7xC-wb-WvP"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="ZD0-PZ-OR7" secondAttribute="trailing" id="DSr-VW-KUV"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="GL0-vF-WN2" secondAttribute="trailing" id="EJg-is-062"/>
-                                            <constraint firstItem="mog-vG-QvB" firstAttribute="top" secondItem="ZD0-PZ-OR7" secondAttribute="bottom" constant="3" id="FiV-Cr-9wj"/>
                                             <constraint firstItem="ZD0-PZ-OR7" firstAttribute="leading" secondItem="wLs-rV-o7g" secondAttribute="leadingMargin" id="HJS-Oe-mLi"/>
                                             <constraint firstItem="GT8-mG-yZr" firstAttribute="top" secondItem="wLs-rV-o7g" secondAttribute="topMargin" constant="7" id="Hya-Mk-Wqh"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="mog-vG-QvB" secondAttribute="trailing" constant="3" id="KZ3-lz-uJp"/>
                                             <constraint firstItem="GL0-vF-WN2" firstAttribute="top" secondItem="wLs-rV-o7g" secondAttribute="topMargin" id="WZW-dc-Gsd"/>
-                                            <constraint firstAttribute="bottomMargin" secondItem="mog-vG-QvB" secondAttribute="bottom" constant="3" id="Y40-jy-zye"/>
                                             <constraint firstAttribute="trailing" secondItem="gLD-kf-zX3" secondAttribute="trailing" constant="6" id="jKh-gI-tYE"/>
                                             <constraint firstAttribute="bottomMargin" secondItem="GL0-vF-WN2" secondAttribute="bottom" id="jXv-hW-JQ4"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="GT8-mG-yZr" secondAttribute="trailing" id="jt2-0T-WA8"/>
                                             <constraint firstAttribute="bottom" secondItem="gLD-kf-zX3" secondAttribute="bottom" constant="6" id="mg7-Lo-bEx"/>
-                                            <constraint firstItem="mog-vG-QvB" firstAttribute="leading" secondItem="wLs-rV-o7g" secondAttribute="leadingMargin" constant="3" id="w1E-z9-RRM"/>
                                         </constraints>
                                         <size key="customSize" width="180" height="200"/>
                                         <connections>
                                             <outlet property="favoriteButton" destination="gLD-kf-zX3" id="QfR-UT-gFw"/>
                                             <outlet property="nameLabel" destination="GT8-mG-yZr" id="tOx-jk-dWv"/>
                                             <outlet property="posterImageView" destination="GL0-vF-WN2" id="lCb-US-nDi"/>
-                                            <outlet property="shortDescriptionLabel" destination="mog-vG-QvB" id="7KR-wV-beA"/>
                                             <outlet property="yearLabel" destination="ZD0-PZ-OR7" id="gHe-ag-eob"/>
                                         </connections>
                                     </collectionViewCell>
@@ -221,8 +210,8 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="Rh4-j5-tmc"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="bigPosterImageView" destination="lVH-GW-xPE" id="is7-LA-NbO"/>
-                        <outlet property="movieDescriptionView" destination="xmy-zY-rdZ" id="q2d-RI-hCk"/>
+                        <outlet property="movieDetailsTextView" destination="xmy-zY-rdZ" id="q2d-RI-hCk"/>
+                        <outlet property="posterImageView" destination="lVH-GW-xPE" id="is7-LA-NbO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uap-az-ebR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -273,12 +262,6 @@
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RKv-Fw-LHD">
-                                                    <rect key="frame" x="11" y="21" width="158" height="168"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yHF-7k-k70">
                                                     <rect key="frame" x="138" y="158" width="36" height="36"/>
                                                     <constraints>
@@ -304,21 +287,16 @@
                                             <constraint firstAttribute="trailingMargin" secondItem="V1C-41-OjS" secondAttribute="trailing" id="PxE-Mr-T8N"/>
                                             <constraint firstAttribute="bottom" secondItem="yHF-7k-k70" secondAttribute="bottom" constant="6" id="SPR-Nd-VkD"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="alH-Lq-6Vu" secondAttribute="trailing" id="TB1-Zy-noV"/>
-                                            <constraint firstItem="RKv-Fw-LHD" firstAttribute="leading" secondItem="MVM-4Q-MVE" secondAttribute="leadingMargin" constant="3" id="VMw-40-ebd"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="RKv-Fw-LHD" secondAttribute="trailing" constant="3" id="Xg6-mC-FRb"/>
                                             <constraint firstItem="V1C-41-OjS" firstAttribute="top" secondItem="x4x-eh-cL6" secondAttribute="bottom" constant="3" id="dB1-km-oht"/>
-                                            <constraint firstItem="RKv-Fw-LHD" firstAttribute="top" secondItem="V1C-41-OjS" secondAttribute="bottom" constant="3" id="dbY-gJ-Ogp"/>
                                             <constraint firstItem="V1C-41-OjS" firstAttribute="leading" secondItem="MVM-4Q-MVE" secondAttribute="leadingMargin" id="elQ-N3-UQu"/>
                                             <constraint firstItem="alH-Lq-6Vu" firstAttribute="top" secondItem="MVM-4Q-MVE" secondAttribute="topMargin" id="fwZ-1Y-m3P"/>
                                             <constraint firstAttribute="bottomMargin" secondItem="alH-Lq-6Vu" secondAttribute="bottom" id="jYr-zC-qOG"/>
-                                            <constraint firstAttribute="bottomMargin" secondItem="RKv-Fw-LHD" secondAttribute="bottom" constant="3" id="kc3-UR-tH1"/>
                                         </constraints>
                                         <size key="customSize" width="180" height="200"/>
                                         <connections>
                                             <outlet property="favoriteButton" destination="yHF-7k-k70" id="YNn-PL-ltW"/>
                                             <outlet property="nameLabel" destination="x4x-eh-cL6" id="DZZ-VP-4nY"/>
                                             <outlet property="posterImageView" destination="alH-Lq-6Vu" id="DuY-kY-ven"/>
-                                            <outlet property="shortDescriptionLabel" destination="RKv-Fw-LHD" id="n5R-Lc-LvO"/>
                                             <outlet property="yearLabel" destination="V1C-41-OjS" id="NLU-AB-fdr"/>
                                         </connections>
                                     </collectionViewCell>

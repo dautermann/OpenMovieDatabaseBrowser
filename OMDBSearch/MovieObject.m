@@ -62,7 +62,6 @@
         return FALSE;
     }
     _movieIDString = movieDictionary[@"imdbID"];
-//    _director = movieDictionary[@"artistName"];
     _releaseYear = movieDictionary[@"Year"];
     NSString *potentialURL = movieDictionary[@"Poster"];
     // some movies come back with "N/A" in the poster... 7 here is the minimum length for a HTTP:// prefix
@@ -74,7 +73,7 @@
     NSString *plot = movieDictionary[@"Plot"];
     if([plot length] > 0)
     {
-        _longDescription = plot;
+        _plot = plot;
     }
     NSString *rated = movieDictionary[@"Rated"];
     if([rated length] > 0)
@@ -83,16 +82,6 @@
     }
     _isFavorite = [[MovieFavoritesManager sharedInstance] isThisMovieAFavorite:self.movieIDString];
 
-    // I want a big poster
-    //
-    // http://stackoverflow.com/questions/8781725/larger-itunes-search-api-images
-//    NSMutableString *posterString = [[NSMutableString alloc] initWithString:movieDictionary[@"Poster"] ? movieDictionary[@"Poster"]:@""];
-//    if ([posterString length] > 0)
-//    {
-//        [posterString replaceOccurrencesOfString:@"100x100" withString:@"600x600" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [posterString length])];
-
-//        _posterBigURL = [NSURL URLWithString:posterString];
-//    }
     return TRUE;
 }
 
@@ -120,10 +109,10 @@
             {
                 [self populateMovieFieldsWith:omdbResultDict];
 
-                if (self.collectionCell != nil)
-                {
-                    [self.collectionCell configureCell];
-                }
+                // this updates the UI so do it on the main thread
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.delegate movieObjectUpdated];
+                });
             }
         }
     }];

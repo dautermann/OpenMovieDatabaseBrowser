@@ -249,7 +249,7 @@
 				TargetAttributes = {
 					2576A6AD1C8181CC00819959 = {
 						CreatedOnToolsVersion = 7.2;
-						LastSwiftMigration = 0940;
+						LastSwiftMigration = 1120;
 					};
 					2576A6C61C8181CC00819959 = {
 						CreatedOnToolsVersion = 7.2;
@@ -260,10 +260,9 @@
 			};
 			buildConfigurationList = 2576A6A91C8181CC00819959 /* Build configuration list for PBXProject "OMDBSearch" */;
 			compatibilityVersion = "Xcode 10.0";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 				de,
@@ -484,7 +483,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "OMDBSearch/OMDBSearch-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -505,7 +504,7 @@
 				PRODUCT_NAME = OMDBSearch;
 				SWIFT_OBJC_BRIDGING_HEADER = "OMDBSearch/OMDBSearch-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

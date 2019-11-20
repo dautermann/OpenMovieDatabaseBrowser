@@ -64,7 +64,7 @@
     if (self.movieObject != nil)
     {
         // tell the about-to-be-forgotten movie object to forget about us
-        self.movieObject.collectionCell = nil;
+        self.movieObject.delegate = nil;
         // and forget the movie object (because we're about to get reused)
         self.movieObject = nil;
     }
@@ -97,24 +97,18 @@
 
             self.yearLabel.text = self.movieObject.releaseYear;
 
-            NSString *description = self.movieObject.shortDescription;
-            if(description == NULL)
-            {
-                description = self.movieObject.longDescription;
-            }
-            self.shortDescriptionLabel.text = description;
+            self.shortDescriptionLabel.text = self.movieObject.plot;
 
             self.favoriteButton.selected = self.movieObject.isFavorite;
 
-            // the 100 x 100 simply looks too grainy to be sexy, so we'll use the BIG poster...
-            //
-            // the only issue might be on large iPads where a lot of images are on screen.
-            //
-            // if I see any memory warnings during extensive testing, I'd probably want to
-            // write a UIImage category to generate thumbnails directly from this big UIImage object
             [self setPosterImageToURL:self.movieObject.posterSmallURL];
         });
     }
+}
+
+- (void) movieObjectUpdated
+{
+    [self configureCell];
 }
 
 - (void)setCellToMovieObject:(MovieObject *)moToSet
